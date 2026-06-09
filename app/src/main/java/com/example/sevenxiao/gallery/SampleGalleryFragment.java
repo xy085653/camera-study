@@ -128,6 +128,11 @@ public class SampleGalleryFragment extends Fragment {
                 "colorcast_01", "白平衡不准导致偏黄", "samples/colorcast_01.jpg"));
         samples.add(new SampleModel("8", "欠曝_逆光", "image", "欠曝",
                 "underexposure_01", "逆光主体欠曝，暗部细节丢失", "samples/underexposure_01.jpg"));
+        // 视频样张（将 .mp4 文件放入 assets/samples/ 即可生效）
+        samples.add(new SampleModel("9", "夜景_噪点", "video", "视频",
+                "night_noise.mp4", "夜景视频中高ISO导致的动态噪点", "samples/night_noise.mp4"));
+        samples.add(new SampleModel("10", "运动_模糊", "video", "视频",
+                "motion_blur.mp4", "快速运动物体在视频中的拖影", "samples/motion_blur.mp4"));
         return samples;
     }
 }
