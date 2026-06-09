@@ -45,6 +45,13 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
         holder.category.setText(sample.getCategory());
         holder.category.setVisibility(View.VISIBLE);
 
+        // 视频角标
+        if ("video".equals(sample.getType())) {
+            holder.videoBadge.setVisibility(View.VISIBLE);
+        } else {
+            holder.videoBadge.setVisibility(View.GONE);
+        }
+
         // 使用 Glide 从 assets 加载图片
         Glide.with(holder.thumbnail.getContext())
                 .load("file:///android_asset/" + sample.getLocalAsset())
@@ -70,6 +77,7 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
         ImageView thumbnail;
         TextView title;
         TextView category;
+        TextView videoBadge;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -77,6 +85,7 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
             thumbnail = itemView.findViewById(R.id.sample_thumbnail);
             title = itemView.findViewById(R.id.sample_title);
             category = itemView.findViewById(R.id.sample_category);
+            videoBadge = itemView.findViewById(R.id.video_badge);
         }
     }
 }

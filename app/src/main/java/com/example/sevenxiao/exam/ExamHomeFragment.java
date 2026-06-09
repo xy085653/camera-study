@@ -27,7 +27,7 @@ public class ExamHomeFragment extends Fragment {
         view.findViewById(R.id.basic_card).setOnClickListener(v ->
                 startActivity(ExamActivity.createIntent(requireContext(), "basic")));
 
-        // Phase 2: 进阶测试暂不可用
-        view.findViewById(R.id.advanced_card).setOnClickListener(v -> { });
+        view.findViewById(R.id.advanced_card).setOnClickListener(v ->
+                startActivity(ExamActivity.createIntent(requireContext(), "advanced")));
     }
 }

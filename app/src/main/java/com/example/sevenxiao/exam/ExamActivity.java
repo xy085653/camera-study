@@ -3,9 +3,11 @@ package com.example.sevenxiao.exam;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -29,18 +31,24 @@ import java.util.List;
 public class ExamActivity extends AppCompatActivity {
 
     private static final String EXTRA_DIFFICULTY = "extra_difficulty";
+    private static final long ADVANCED_TIME_LIMIT = 15 * 60 * 1000; // 15 minutes
 
     private AssetDataSource dataSource;
     private List<QuestionModel> questions;
     private ExamResultModel result;
     private int currentIndex = 0;
     private long startTime;
+    private String difficulty;
+    private CountDownTimer countDownTimer;
+    private int questionCount;
 
     private TextView progressText;
+    private TextView timerText;
     private ProgressBar progressBar;
     private ImageView questionImage;
     private TextView questionText;
     private LinearLayout optionsContainer;
+    private EditText descriptionInput;
     private MaterialButton nextBtn;
     private View[] optionViews;
 
@@ -59,33 +67,63 @@ public class ExamActivity extends AppCompatActivity {
         final int paddingDp = (int) (16 * getResources().getDisplayMetrics().density);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.exam_root), (v, insets) -> {
             Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(
-                    paddingDp + bars.left,
-                    paddingDp + bars.top,
-                    paddingDp + bars.right,
-                    paddingDp + bars.bottom
-            );
+            v.setPadding(paddingDp + bars.left, paddingDp + bars.top,
+                    paddingDp + bars.right, paddingDp + bars.bottom);
             return insets;
         });
 
-        String difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
+        difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
         if (difficulty == null) difficulty = "basic";
+
+        questionCount = difficulty.equals("advanced") ? 15 : 10;
 
         dataSource = new AssetDataSource(this);
         List<QuestionModel> all = dataSource.loadQuestions(difficulty);
-        questions = dataSource.pickRandomQuestions(all, 10);
+        questions = dataSource.pickRandomQuestions(all, questionCount);
         result = new ExamResultModel(difficulty, questions);
         startTime = SystemClock.elapsedRealtime();
 
         progressText = findViewById(R.id.progress_text);
+        timerText = findViewById(R.id.timer_text);
         progressBar = findViewById(R.id.progress_bar);
         questionImage = findViewById(R.id.question_image);
         questionText = findViewById(R.id.question_text);
         optionsContainer = findViewById(R.id.options_container);
+        descriptionInput = findViewById(R.id.description_input);
         nextBtn = findViewById(R.id.next_btn);
+
+        if (difficulty.equals("advanced")) {
+            timerText.setVisibility(View.VISIBLE);
+            startTimer();
+        }
 
         nextBtn.setOnClickListener(v -> goToNext());
         showQuestion(0);
+    }
+
+    private void startTimer() {
+        countDownTimer = new CountDownTimer(ADVANCED_TIME_LIMIT, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long minutes = millisUntilFinished / 60000;
+                long seconds = (millisUntilFinished % 60000) / 1000;
+                timerText.setText(String.format("⏱ %02d:%02d", minutes, seconds));
+                if (millisUntilFinished < 60000) {
+                    timerText.setTextColor(0xFFDC2626);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                submitExam();
+            }
+        }.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) countDownTimer.cancel();
     }
 
     private void showQuestion(int index) {
@@ -93,7 +131,6 @@ public class ExamActivity extends AppCompatActivity {
         currentIndex = index;
         QuestionModel q = questions.get(index);
 
-        // 更新进度
         progressText.setText("第 " + (index + 1) + "/" + questions.size() + " 题");
         progressBar.setProgress((index + 1) * 100 / questions.size());
 
@@ -110,14 +147,38 @@ public class ExamActivity extends AppCompatActivity {
             questionImage.setVisibility(View.GONE);
         }
 
-        // 显示题干
         questionText.setText(q.getQuestionText());
 
-        // 动态创建选项布局（使用统一模板，ABCD 始终对齐）
+        // 根据题型显示选项或输入框
+        if ("description".equals(q.getType())) {
+            optionsContainer.setVisibility(View.GONE);
+            descriptionInput.setVisibility(View.VISIBLE);
+
+            String existing = result.getUserAnswers().get(q.getId());
+            if (existing != null) {
+                descriptionInput.setText(existing);
+            } else {
+                descriptionInput.setText("");
+            }
+        } else {
+            optionsContainer.setVisibility(View.VISIBLE);
+            descriptionInput.setVisibility(View.GONE);
+            buildOptions(q);
+        }
+
+        if (index == questions.size() - 1) {
+            nextBtn.setText("提交");
+        } else {
+            nextBtn.setText("下一题");
+        }
+    }
+
+    private void buildOptions(QuestionModel q) {
         optionsContainer.removeAllViews();
         String[] options = q.getOptions();
         optionViews = new View[options.length];
         LayoutInflater inflater = LayoutInflater.from(this);
+
         for (int i = 0; i < options.length; i++) {
             final int optionIndex = i;
             View optionView = inflater.inflate(R.layout.item_exam_option, optionsContainer, false);
@@ -135,7 +196,6 @@ public class ExamActivity extends AppCompatActivity {
             optionViews[i] = optionView;
         }
 
-        // 检查是否已有答案（旋转恢复等场景）
         String existingAnswer = result.getUserAnswers().get(q.getId());
         if (existingAnswer != null) {
             String[] labels = {"A", "B", "C", "D", "E"};
@@ -146,20 +206,12 @@ public class ExamActivity extends AppCompatActivity {
                 }
             }
         }
-
-        // 最后一题切换按钮文字
-        if (index == questions.size() - 1) {
-            nextBtn.setText("提交");
-        } else {
-            nextBtn.setText("下一题");
-        }
     }
 
     private void selectOption(int optionIndex) {
         QuestionModel q = questions.get(currentIndex);
         String[] labels = {"A", "B", "C", "D", "E"};
-        String answer = labels[optionIndex];
-        result.addAnswer(q.getId(), answer);
+        result.addAnswer(q.getId(), labels[optionIndex]);
         highlightOption(optionIndex);
     }
 
@@ -181,20 +233,29 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void goToNext() {
-        // 检查当前题是否已作答
         QuestionModel q = questions.get(currentIndex);
-        if (!result.getUserAnswers().containsKey(q.getId())) {
-            return;
+
+        // 保存当前题答案
+        if ("description".equals(q.getType())) {
+            String text = descriptionInput.getText().toString().trim();
+            if (text.isEmpty()) return;
+            result.addAnswer(q.getId(), text);
+        } else {
+            if (!result.getUserAnswers().containsKey(q.getId())) return;
         }
 
         if (currentIndex >= questions.size() - 1) {
-            // 最后一道题，提交
-            result.setTimeSpent((SystemClock.elapsedRealtime() - startTime) / 1000);
-            result.calculateScore();
-            startActivity(ExamResultActivity.createIntent(this, result));
-            finish();
+            submitExam();
         } else {
             showQuestion(currentIndex + 1);
         }
+    }
+
+    private void submitExam() {
+        if (countDownTimer != null) countDownTimer.cancel();
+        result.setTimeSpent((SystemClock.elapsedRealtime() - startTime) / 1000);
+        result.calculateScore();
+        startActivity(ExamResultActivity.createIntent(this, result));
+        finish();
     }
 }

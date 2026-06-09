@@ -30,12 +30,14 @@ public class ExamResultActivity extends AppCompatActivity {
         String[] correctAnswers = new String[result.getQuestions().size()];
         String[] explanations = new String[result.getQuestions().size()];
         String[] userAnswers = new String[result.getQuestions().size()];
+        String[] questionTypes = new String[result.getQuestions().size()];
 
         for (int i = 0; i < result.getQuestions().size(); i++) {
             QuestionModel q = result.getQuestions().get(i);
             questionTexts[i] = q.getQuestionText();
             correctAnswers[i] = q.getCorrectAnswer();
             explanations[i] = q.getExplanation();
+            questionTypes[i] = q.getType();
             String ua = result.getUserAnswers().get(q.getId());
             userAnswers[i] = ua != null ? ua : "";
         }
@@ -44,6 +46,7 @@ public class ExamResultActivity extends AppCompatActivity {
         intent.putExtra("correctAnswers", correctAnswers);
         intent.putExtra("explanations", explanations);
         intent.putExtra("userAnswers", userAnswers);
+        intent.putExtra("questionTypes", questionTypes);
 
         return intent;
     }
@@ -70,6 +73,7 @@ public class ExamResultActivity extends AppCompatActivity {
         String[] correctAnswers = getIntent().getStringArrayExtra("correctAnswers");
         String[] explanations = getIntent().getStringArrayExtra("explanations");
         String[] userAnswers = getIntent().getStringArrayExtra("userAnswers");
+        String[] questionTypes = getIntent().getStringArrayExtra("questionTypes");
 
         // 显示分数
         TextView scoreText = findViewById(R.id.score_text);
@@ -85,12 +89,29 @@ public class ExamResultActivity extends AppCompatActivity {
         if (questionTexts != null && correctAnswers != null) {
             for (int i = 0; i < questionTexts.length; i++) {
                 String userAns = userAnswers != null && i < userAnswers.length ? userAnswers[i] : "";
-                boolean isCorrect = userAns.equals(correctAnswers[i]);
+                String type = questionTypes != null && i < questionTypes.length ? questionTypes[i] : "choice";
 
-                String resultIcon = isCorrect ? "✅" : "❌";
+                boolean isDescription = "description".equals(type);
+                boolean isCorrect = !isDescription && userAns.equals(correctAnswers[i]);
+
+                String resultIcon;
+                if (isDescription) {
+                    resultIcon = "📝";
+                } else {
+                    resultIcon = isCorrect ? "✅" : "❌";
+                }
+
                 String reviewText = resultIcon + "  " + questionTexts[i] + "\n"
-                        + "你的答案: " + userAns + "    正确答案: " + correctAnswers[i] + "\n"
-                        + (explanations != null && i < explanations.length ? "解析: " + explanations[i] : "");
+                        + "你的答案: " + userAns + "\n";
+
+                if (isDescription) {
+                    reviewText += "题型: 描述题（需人工评分）\n";
+                } else {
+                    String correctLabel = correctAnswers[i] != null ? correctAnswers[i] : "";
+                    reviewText += "正确答案: " + correctLabel + "\n";
+                }
+
+                reviewText += (explanations != null && i < explanations.length ? "解析: " + explanations[i] : "");
 
                 TextView tv = new TextView(this);
                 tv.setText(reviewText);
@@ -98,7 +119,10 @@ public class ExamResultActivity extends AppCompatActivity {
                 tv.setLineSpacing(4, 1);
                 tv.setPadding(16, 16, 16, 16);
 
-                if (isCorrect) {
+                if (isDescription) {
+                    tv.setBackgroundResource(R.drawable.chip_unselected);
+                    tv.setTextColor(0xFF374151);
+                } else if (isCorrect) {
                     tv.setBackgroundResource(R.drawable.chip_unselected);
                     tv.setTextColor(0xFF374151);
                 } else {

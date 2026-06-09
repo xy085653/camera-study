@@ -41,6 +41,8 @@ dependencies {
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
     implementation libs.glide
+    implementation libs.media3.exoplayer
+    implementation libs.media3.ui
 
     testImplementation libs.junit
     androidTestImplementation libs.espresso.core

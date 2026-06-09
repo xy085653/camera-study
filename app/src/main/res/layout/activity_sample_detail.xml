@@ -16,6 +16,16 @@
         android:src="@android:color/darker_gray"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@android:color/black"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:use_controller="true"
+        app:resize_mode="fit" />
+
     <TextView
         android:id="@+id/category_chip"
         android:layout_width="wrap_content"
@@ -28,6 +38,21 @@
         android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/sample_image"
+        app:layout_constraintTop_toTopOf="@id/sample_image" />
+
+    <TextView
+        android:id="@+id/video_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="#EF4444"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="3dp"
+        android:text="▶ 视频"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/sample_image"
         app:layout_constraintTop_toTopOf="@id/sample_image" />
 
     <TextView

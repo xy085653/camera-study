@@ -1,0 +1,167 @@
+[
+  {
+    "id": "a001",
+    "type": "choice",
+    "category": "复合",
+    "difficulty": "advanced",
+    "imageAsset": "samples/overexposure_01.jpg",
+    "questionText": "下图存在哪些影像问题？（选择最全面的描述）",
+    "options": ["仅过曝", "过曝 + 细节丢失", "过曝 + 偏色 + 对比度异常", "正常曝光"],
+    "correctAnswer": "C",
+    "explanation": "图中不仅高光区域过曝，整体色调也偏暖，且对比度偏高导致中间调层次不足，是复合型影像问题。"
+  },
+  {
+    "id": "a002",
+    "type": "description",
+    "category": "复合",
+    "difficulty": "advanced",
+    "imageAsset": "samples/ghost_01.jpg",
+    "questionText": "请分析下图中的影像质量问题，列出至少2个缺陷类型，并说明各自的特征。",
+    "options": [],
+    "correctAnswer": "",
+    "explanation": "图中存在：① 鬼影——光源对侧有彩色虚影，由镜头内反射造成；② 炫光——从光源处辐射的条状光斑，降低整体对比度。"
+  },
+  {
+    "id": "a003",
+    "type": "choice",
+    "category": "噪点",
+    "difficulty": "advanced",
+    "imageAsset": "samples/noise_01.jpg",
+    "questionText": "下图暗部区域的彩色颗粒属于什么类型的噪点？",
+    "options": ["亮度噪点（Luminance Noise）", "彩色噪点（Chromatic Noise）", "固定模式噪点（Fixed Pattern Noise）", "热点噪点（Hot Pixel）"],
+    "correctAnswer": "B",
+    "explanation": "图中暗部区域可见红、绿、蓝三色的随机彩色颗粒，这是典型的彩色噪点（色度噪点），通常在高ISO或长曝光时出现。"
+  },
+  {
+    "id": "a004",
+    "type": "judge",
+    "category": "模糊",
+    "difficulty": "advanced",
+    "imageAsset": "samples/blur_01.jpg",
+    "questionText": "下图中的模糊现象可以通过缩小光圈来改善？",
+    "options": ["是", "否"],
+    "correctAnswer": "B",
+    "explanation": "图中模糊是运动模糊（方向性拖影），缩小光圈只能增加景深，不能消除运动模糊。正确的改善方法是提高快门速度或使用防抖。"
+  },
+  {
+    "id": "a005",
+    "type": "description",
+    "category": "复合",
+    "difficulty": "advanced",
+    "imageAsset": "samples/flare_01.jpg",
+    "questionText": "分析下图产生炫光（Lens Flare）的原因，并列出至少3种避免或减轻炫光的方法。",
+    "options": [],
+    "correctAnswer": "",
+    "explanation": "产生原因：强光（太阳/灯光）直射镜头，光线在镜片间多次反射。避免方法：① 使用遮光罩阻挡杂光；② 避免光源直射镜头；③ 选用多层镀膜镜头；④ 取下非必要滤镜；⑤ 调整拍摄角度。"
+  },
+  {
+    "id": "a006",
+    "type": "choice",
+    "category": "偏色",
+    "difficulty": "advanced",
+    "imageAsset": "samples/colorcast_01.jpg",
+    "questionText": "要校正下图中的偏色问题，最精确的方法是？",
+    "options": ["调整色温滑块", "使用白平衡吸管点击中性色区域", "使用预设白平衡模式", "增加饱和度"],
+    "correctAnswer": "B",
+    "explanation": "使用白平衡吸管点击画面中应为中性色（白/灰）的区域，可以最精确地校正整体偏色。色温滑块调整凭经验，没有吸管精确。"
+  },
+  {
+    "id": "a007",
+    "type": "judge",
+    "category": "过曝",
+    "difficulty": "advanced",
+    "imageAsset": "samples/overexposure_02.jpg",
+    "questionText": "过曝区域在后期处理中可以通过降低高光完全恢复细节？",
+    "options": ["是", "否"],
+    "correctAnswer": "B",
+    "explanation": "过曝区域的像素值达到传感器上限（如RGB=255,255,255），原始数据中已经没有任何细节信息。后期降低高光只能改变亮度，无法恢复丢失的细节。"
+  },
+  {
+    "id": "a008",
+    "type": "description",
+    "category": "欠曝",
+    "difficulty": "advanced",
+    "imageAsset": "samples/underexposure_01.jpg",
+    "questionText": "下图存在欠曝问题，请在暗部区域中描述：① 欠曝造成的具体影响；② 提亮后期时可能出现的副作用。",
+    "options": [],
+    "correctAnswer": "",
+    "explanation": "① 欠曝导致主体和暗部细节完全丢失在黑色中，整体画面偏暗，色彩饱和度降低。② 提亮后期会产生明显噪点（尤其是彩色噪点），对比度下降，可能出现banding（色阶断层）。"
+  },
+  {
+    "id": "a009",
+    "type": "choice",
+    "category": "综合",
+    "difficulty": "advanced",
+    "imageAsset": "samples/noise_01.jpg",
+    "questionText": "在低光环境下拍摄，为获得最佳画质，以下操作优先级正确的是？",
+    "options": ["加大光圈 > 降低快门速度 > 提高ISO", "提高ISO > 加大光圈 > 降低快门速度", "降低快门速度 > 提高ISO > 加大光圈", "任何顺序都一样"],
+    "correctAnswer": "A",
+    "explanation": "优先加大光圈（不影响画质），其次降低快门速度（需防抖或三脚架），最后才考虑提高ISO（直接引入噪点）。"
+  },
+  {
+    "id": "a010",
+    "type": "choice",
+    "category": "综合",
+    "difficulty": "advanced",
+    "imageAsset": "samples/ghost_01.jpg",
+    "questionText": "以下哪种镜头镀膜技术对抑制鬼影和炫光最有效？",
+    "options": ["单层增透膜", "多层纳米镀膜（Nano Crystal Coat）", "氟涂层（Fluorine Coating）", "防污镀膜"],
+    "correctAnswer": "B",
+    "explanation": "多层纳米镀膜能够在更宽的光谱范围内有效减少反射，大幅降低鬼影和炫光。单层增透膜只在特定波长有效，氟涂层和防污镀膜主要功能是防污防水。"
+  },
+  {
+    "id": "a011",
+    "type": "judge",
+    "category": "炫光",
+    "difficulty": "advanced",
+    "imageAsset": "samples/flare_01.jpg",
+    "questionText": "使用广角镜头拍摄比使用长焦镜头更容易出现炫光问题？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "广角镜头视角大，更容易将强光源纳入画面或紧邻画面边缘，且广角镜头前组镜片通常更大更凸，增加了炫光的概率。"
+  },
+  {
+    "id": "a012",
+    "type": "choice",
+    "category": "噪点",
+    "difficulty": "advanced",
+    "imageAsset": "samples/noise_01.jpg",
+    "questionText": "下列哪种降噪方法对保留图像细节影响最小？",
+    "options": ["机内JPEG降噪", "后期AI降噪（如Lightroom Denoise）", "后期高斯模糊", "多帧合成降噪"],
+    "correctAnswer": "D",
+    "explanation": "多帧合成降噪通过拍摄多张相同场景的照片叠加平均，在不损失细节的前提下有效降低随机噪点。AI降噪也较好但可能产生伪影，高斯模糊会严重损失细节。"
+  },
+  {
+    "id": "a013",
+    "type": "description",
+    "category": "鬼影",
+    "difficulty": "advanced",
+    "imageAsset": "samples/ghost_01.jpg",
+    "questionText": "请详细描述鬼影（Ghost）与炫光（Lens Flare）的区别，包括成因、形态特征和改善方法的差异。",
+    "options": [],
+    "correctAnswer": "",
+    "explanation": "区别：① 成因：鬼影是镜片间多次反射形成的镜像倒影；炫光是光线在镜筒内散射形成的条纹。② 形态：鬼影呈彩色虚影，在光源对侧对称出现；炫光是从光源辐射的条状/雾状光斑。③ 改善：两者都可用遮光罩，但鬼影更依赖镜头镀膜质量，炫光还需注意滤镜和镜头清洁。"
+  },
+  {
+    "id": "a014",
+    "type": "choice",
+    "category": "测试",
+    "difficulty": "advanced",
+    "imageAsset": "",
+    "questionText": "影像质量评测中，MTF（Modulation Transfer Function）曲线主要衡量什么？",
+    "options": ["色彩还原能力", "镜头解析力/对比度传递", "噪点水平", "曝光准确性"],
+    "correctAnswer": "B",
+    "explanation": "MTF曲线衡量镜头在不同空间频率下传递对比度的能力，是评估镜头解析力和成像质量最重要的客观指标之一。"
+  },
+  {
+    "id": "a015",
+    "type": "judge",
+    "category": "测试",
+    "difficulty": "advanced",
+    "imageAsset": "",
+    "questionText": "RAW格式文件比JPEG格式包含更多的亮度信息和色彩深度？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "RAW文件直接保存传感器原始数据（通常10-14bit），而JPEG经过处理和压缩（8bit），RAW确实包含更多的亮度层次和色彩信息，后期调整空间更大。"
+  }
+]

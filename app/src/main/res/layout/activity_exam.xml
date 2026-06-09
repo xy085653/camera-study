@@ -5,14 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/progress_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="第 1/10 题"
-        android:textColor="#666"
-        android:textSize="14sp"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="第 1/10 题"
+            android:textColor="#666"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#EF4444"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -22,7 +42,7 @@
         android:layout_marginTop="8dp"
         android:max="100"
         android:progress="10"
-        app:layout_constraintTop_toBottomOf="@id/progress_text" />
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
     <ImageView
         android:id="@+id/question_image"
@@ -52,6 +72,21 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/next_btn"
+        app:layout_constraintTop_toBottomOf="@id/question_text" />
+
+    <EditText
+        android:id="@+id/description_input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_image_bg"
+        android:gravity="top"
+        android:hint="在此输入你的分析..."
+        android:minLines="4"
+        android:padding="12dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/next_btn"
         app:layout_constraintTop_toBottomOf="@id/question_text" />
 

@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="20-30 题 · 含描述题 · 限时"
+                android:text="15 题 · 含描述题 · 限时 15 分钟"
                 android:textColor="#666"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
