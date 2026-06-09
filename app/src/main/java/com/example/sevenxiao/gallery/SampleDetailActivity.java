@@ -51,15 +51,11 @@ public class SampleDetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sample_detail);
 
-        final int contentPadding = (int) (16 * getResources().getDisplayMetrics().density);
+        final int padding = (int) (16 * getResources().getDisplayMetrics().density);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.detail_root), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(
-                    contentPadding + systemBars.left,
-                    contentPadding + systemBars.top,
-                    contentPadding + systemBars.right,
-                    contentPadding + systemBars.bottom
-            );
+            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(padding + bars.left, padding + bars.top,
+                    padding + bars.right, padding + bars.bottom);
             return insets;
         });
 
@@ -68,7 +64,8 @@ public class SampleDetailActivity extends AppCompatActivity {
         TextView titleView = findViewById(R.id.sample_title);
         TextView categoryView = findViewById(R.id.category_chip);
         TextView descView = findViewById(R.id.sample_description);
-        TextView videoIndicator = findViewById(R.id.video_indicator);
+        TextView formatBadge = findViewById(R.id.format_badge);
+        TextView fileNameView = findViewById(R.id.file_name);
 
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         String category = getIntent().getStringExtra(EXTRA_CATEGORY);
@@ -79,12 +76,16 @@ public class SampleDetailActivity extends AppCompatActivity {
         titleView.setText(title);
         categoryView.setText(category);
         descView.setText(description);
+        if (file != null) {
+            fileNameView.setText(file.replace("samples/", ""));
+        }
 
         if ("video".equals(type) && file != null) {
             // 视频：使用 ExoPlayer
             imageView.setVisibility(View.GONE);
             playerView.setVisibility(View.VISIBLE);
-            videoIndicator.setVisibility(View.VISIBLE);
+            formatBadge.setVisibility(View.VISIBLE);
+            formatBadge.setText("MP4");
 
             player = new ExoPlayer.Builder(this).build();
             playerView.setPlayer(player);
@@ -98,7 +99,8 @@ public class SampleDetailActivity extends AppCompatActivity {
             // 图片：使用 Glide
             imageView.setVisibility(View.VISIBLE);
             playerView.setVisibility(View.GONE);
-            videoIndicator.setVisibility(View.GONE);
+            formatBadge.setVisibility(View.VISIBLE);
+            formatBadge.setText("JPG");
 
             String assetPath = file != null ? file : "samples/overexposure_01.jpg";
             Glide.with(this)
