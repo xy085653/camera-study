@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/sample_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/rounded_image_bg"
+        android:clipToOutline="true"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/category_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/category_chip"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:text="过曝"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/sample_image"
+        app:layout_constraintTop_toTopOf="@id/sample_image" />
+
+    <TextView
+        android:id="@+id/sample_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="样张名称"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/sample_image" />
+
+    <TextView
+        android:id="@+id/sample_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="4dp"
+        android:text="缺陷说明"
+        android:textColor="#555"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sample_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

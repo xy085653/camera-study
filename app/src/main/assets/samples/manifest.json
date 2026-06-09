@@ -1,0 +1,10 @@
+[
+  {"id":"1","title":"过曝_日景","type":"image","category":"过曝","file":"samples/overexposure_01.jpg","desc":"高光区域细节丢失"},
+  {"id":"2","title":"过曝_夜景","type":"image","category":"过曝","file":"samples/overexposure_02.jpg","desc":"灯光高光溢出"},
+  {"id":"3","title":"鬼影_逆光","type":"image","category":"鬼影","file":"samples/ghost_01.jpg","desc":"逆光镜头鬼影"},
+  {"id":"4","title":"炫光_夜景","type":"image","category":"炫光","file":"samples/flare_01.jpg","desc":"强光炫光条纹"},
+  {"id":"5","title":"噪点_暗光","type":"image","category":"噪点","file":"samples/noise_01.jpg","desc":"低光ISO噪点"},
+  {"id":"6","title":"模糊_运动","type":"image","category":"模糊","file":"samples/blur_01.jpg","desc":"运动模糊"},
+  {"id":"7","title":"偏色_室内","type":"image","category":"偏色","file":"samples/colorcast_01.jpg","desc":"白平衡偏黄"},
+  {"id":"8","title":"欠曝_逆光","type":"image","category":"欠曝","file":"samples/underexposure_01.jpg","desc":"逆光主体欠曝"}
+]

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_gallery">
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.sevenxiao.gallery.SampleGalleryFragment"
+        android:label="样图库"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_exam"
+        android:name="com.example.sevenxiao.exam.ExamHomeFragment"
+        android:label="考试"
+        tools:layout="@layout/fragment_exam_home" />
+
+    <fragment
+        android:id="@+id/nav_knowledge"
+        android:name="com.example.sevenxiao.knowledge.KnowledgeFragment"
+        android:label="知识库"
+        tools:layout="@layout/fragment_knowledge" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.sevenxiao.profile.ProfileFragment"
+        android:label="我的"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

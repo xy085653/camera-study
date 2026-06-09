@@ -1,0 +1,112 @@
+[
+  {
+    "id": "b001",
+    "type": "choice",
+    "category": "过曝",
+    "difficulty": "basic",
+    "imageAsset": "samples/overexposure_01.jpg",
+    "questionText": "以下哪张图片存在过曝（Overexposure）问题？",
+    "options": ["正常曝光", "欠曝", "过曝", "低对比度"],
+    "correctAnswer": "C",
+    "explanation": "过曝是指画面亮度超过传感器可记录范围，高光区域细节丢失呈现纯白色。正确答案中的图片高光部分（天空）完全失去层次。"
+  },
+  {
+    "id": "b002",
+    "type": "judge",
+    "category": "鬼影",
+    "difficulty": "basic",
+    "imageAsset": "samples/ghost_01.jpg",
+    "questionText": "下图中是否存在鬼影（Ghost/Flare）现象？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "图中在光源对侧出现了明显的彩色虚影，这是典型的镜头鬼影现象，由镜头内部元件间反射造成。"
+  },
+  {
+    "id": "b003",
+    "type": "choice",
+    "category": "噪点",
+    "difficulty": "basic",
+    "imageAsset": "samples/noise_01.jpg",
+    "questionText": "下图中最明显的影像问题是？",
+    "options": ["过曝", "噪点", "偏色", "模糊"],
+    "correctAnswer": "B",
+    "explanation": "图中可以看到大量细小的颗粒状彩色/亮度噪点，尤其在暗部区域最为明显。这是高ISO感光度设置导致的噪点问题。"
+  },
+  {
+    "id": "b004",
+    "type": "judge",
+    "category": "偏色",
+    "difficulty": "basic",
+    "imageAsset": "samples/colorcast_01.jpg",
+    "questionText": "下图是否存在白平衡不准导致的偏色问题？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "图中整体色调偏黄偏暖，中性色（如白色墙面）呈现明显黄色调，是白平衡设置不准确导致的偏色问题。"
+  },
+  {
+    "id": "b005",
+    "type": "choice",
+    "category": "模糊",
+    "difficulty": "basic",
+    "imageAsset": "samples/blur_01.jpg",
+    "questionText": "下图的模糊类型最可能是？",
+    "options": ["失焦模糊", "运动模糊", "镜头污损", "景深模糊"],
+    "correctAnswer": "B",
+    "explanation": "图中模糊呈现方向性条纹，静态物体沿水平方向出现拖影。这是典型的运动模糊，由快门速度不足以冻结运动造成。"
+  },
+  {
+    "id": "b006",
+    "type": "judge",
+    "category": "欠曝",
+    "difficulty": "basic",
+    "imageAsset": "samples/underexposure_01.jpg",
+    "questionText": "下图是否存在欠曝（Underexposure）问题？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "图中主体和暗部区域严重偏暗，细节完全丢失在阴影中，即使调整亮度也难以恢复。这是典型的欠曝问题。"
+  },
+  {
+    "id": "b007",
+    "type": "choice",
+    "category": "炫光",
+    "difficulty": "basic",
+    "imageAsset": "samples/flare_01.jpg",
+    "questionText": "下图中的条状光斑属于什么影像问题？",
+    "options": ["鬼影", "炫光", "过曝", "镜头污损"],
+    "correctAnswer": "B",
+    "explanation": "图中从强光源处延伸出多条彩色条纹状光斑，这是典型的炫光（Lens Flare）现象，由强光在镜头镜片间多次反射形成。"
+  },
+  {
+    "id": "b008",
+    "type": "judge",
+    "category": "过曝",
+    "difficulty": "basic",
+    "imageAsset": "samples/overexposure_02.jpg",
+    "questionText": "下图中灯光区域的高光溢出是否属于过曝？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "灯光区域呈现为无细节的纯白色块，周围光晕也丢失了层次。这是高光溢出导致的过曝问题。"
+  },
+  {
+    "id": "b009",
+    "type": "choice",
+    "category": "综合",
+    "difficulty": "basic",
+    "imageAsset": "samples/ghost_01.jpg",
+    "questionText": "要减少下图中的鬼影问题，最有效的措施是？",
+    "options": ["降低ISO", "使用遮光罩", "提高快门速度", "调整白平衡"],
+    "correctAnswer": "B",
+    "explanation": "使用遮光罩可以有效阻挡非成像光线进入镜头，减少镜头内部反射，是抑制鬼影和炫光最直接有效的方法。"
+  },
+  {
+    "id": "b010",
+    "type": "judge",
+    "category": "噪点",
+    "difficulty": "basic",
+    "imageAsset": "samples/noise_01.jpg",
+    "questionText": "降低ISO设置可以有效减少下图中出现的噪点问题？",
+    "options": ["是", "否"],
+    "correctAnswer": "A",
+    "explanation": "噪点主要源于高ISO设置放大了传感器信号中的噪声。降低ISO是减少噪点的最直接方法，但可能需要配合更长的曝光时间或更大的光圈来维持亮度。"
+  }
+]
