@@ -46,5 +46,15 @@ services:
       DJANGO_SUPERUSER_EMAIL: admin@imagelab.local
       DJANGO_SUPERUSER_PASSWORD: admin123
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    command: tunnel run --token eyJhIjoiZTkyNTg4ZDE1MzUwNmEyZTU3ZmY5Y2MwZWM1ODVhNDYiLCJ0IjoiZGU5ZTMxMWQtMGFkNS00ZDEyLTk3MTctMmUyNGY4YmM3MjlmIiwicyI6Ik4ySTNOREEzWVdFdFpXRTVZUzAwTnpNeExUaGtOVFl0T0RVeU9UVTVOVGd3WkRjMCJ9
+    depends_on:
+      - web
+
 volumes:
   postgres_data:
