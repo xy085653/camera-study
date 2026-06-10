@@ -96,9 +96,7 @@ public class SampleGalleryFragment extends Fragment {
             } else {
                 requireActivity().runOnUiThread(() -> {
                     allSamples.clear();
-                    allSamples.addAll(getBuiltinSamples());
                     filteredSamples.clear();
-                    filteredSamples.addAll(allSamples);
                     adapter.notifyDataSetChanged();
                 });
             }
@@ -134,29 +132,4 @@ public class SampleGalleryFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private List<SampleModel> getBuiltinSamples() {
-        List<SampleModel> samples = new ArrayList<>();
-        samples.add(new SampleModel("1", "过曝_日景", "image", "过曝",
-                "overexposure_01", "高光区域细节丢失，天空过曝成白色", "samples/overexposure_01.jpg"));
-        samples.add(new SampleModel("2", "过曝_夜景", "image", "过曝",
-                "overexposure_02", "灯光过曝导致高光溢出", "samples/overexposure_02.jpg"));
-        samples.add(new SampleModel("3", "鬼影_逆光", "image", "鬼影",
-                "ghost_01", "逆光拍摄产生镜头鬼影", "samples/ghost_01.jpg"));
-        samples.add(new SampleModel("4", "炫光_夜景", "image", "炫光",
-                "flare_01", "强光源引起炫光条纹", "samples/flare_01.jpg"));
-        samples.add(new SampleModel("5", "噪点_暗光", "image", "噪点",
-                "noise_01", "低光环境ISO过高导致噪点", "samples/noise_01.jpg"));
-        samples.add(new SampleModel("6", "模糊_运动", "image", "模糊",
-                "blur_01", "运动模糊导致细节丢失", "samples/blur_01.jpg"));
-        samples.add(new SampleModel("7", "偏色_室内", "image", "偏色",
-                "colorcast_01", "白平衡不准导致偏黄", "samples/colorcast_01.jpg"));
-        samples.add(new SampleModel("8", "欠曝_逆光", "image", "欠曝",
-                "underexposure_01", "逆光主体欠曝，暗部细节丢失", "samples/underexposure_01.jpg"));
-        // 视频样张（将 .mp4 文件放入 assets/samples/ 即可生效）
-        samples.add(new SampleModel("9", "夜景_噪点", "video", "视频",
-                "night_noise.mp4", "夜景视频中高ISO导致的动态噪点", "samples/night_noise.mp4"));
-        samples.add(new SampleModel("10", "运动_模糊", "video", "视频",
-                "motion_blur.mp4", "快速运动物体在视频中的拖影", "samples/motion_blur.mp4"));
-        return samples;
-    }
 }
