@@ -18,11 +18,8 @@ services:
     build:
       context: .
       args:
-        # 国内镜像源：将 PYTHON_IMAGE 改为以下任一即可加速构建
-        # 中科大: docker.mirrors.ustc.edu.cn/library/python:3.12-slim
-        # 网易:   hub-mirror.c.163.com/library/python:3.12-slim
-        # 阿里云: registry.cn-hangzhou.aliyuncs.com/docker-ali/python:3.12-slim
-        PYTHON_IMAGE: python:3.12-slim
+        # 国内镜像源（极空间/无代理环境使用）
+        PYTHON_IMAGE: docker.mirrors.ustc.edu.cn/library/python:3.12-slim
     restart: unless-stopped
     command: >
       sh -c "python manage.py migrate &&
