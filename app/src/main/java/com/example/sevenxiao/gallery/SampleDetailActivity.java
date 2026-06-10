@@ -41,7 +41,12 @@ public class SampleDetailActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_CATEGORY, sample.getCategory());
         intent.putExtra(EXTRA_DESCRIPTION, sample.getDescription());
         intent.putExtra(EXTRA_TYPE, sample.getType());
-        intent.putExtra(EXTRA_FILE, sample.getLocalAsset());
+        // 优先远端 URL，其次本地 assets 路径
+        String file = sample.getStorageUrl();
+        if (file == null || file.isEmpty()) {
+            file = sample.getLocalAsset();
+        }
+        intent.putExtra(EXTRA_FILE, file);
         context.startActivity(intent);
     }
 
