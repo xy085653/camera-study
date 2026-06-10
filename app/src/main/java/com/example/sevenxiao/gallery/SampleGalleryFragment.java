@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sevenxiao.R;
 import com.example.sevenxiao.data.model.SampleModel;
+import com.example.sevenxiao.data.remote.ApiDataSource;
 import com.example.sevenxiao.gallery.adapter.CategoryChipAdapter;
 import com.example.sevenxiao.gallery.adapter.SampleAdapter;
 
@@ -44,10 +45,8 @@ public class SampleGalleryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        allSamples.clear();
-        allSamples.addAll(getBuiltinSamples());
-        filteredSamples.clear();
-        filteredSamples.addAll(allSamples);
+        // 尝试从后端 API 加载样图，失败则用本地数据
+        loadSamples();
 
         // 搜索框
         EditText searchBar = view.findViewById(R.id.search_bar);
@@ -79,6 +78,31 @@ public class SampleGalleryFragment extends Fragment {
         adapter = new SampleAdapter(filteredSamples, sample ->
                 SampleDetailActivity.start(requireContext(), sample));
         sampleGrid.setAdapter(adapter);
+    }
+
+    /** 加载样图：优先从后端 API，失败则回退到本地数据 */
+    private void loadSamples() {
+        new Thread(() -> {
+            ApiDataSource api = new ApiDataSource(requireContext());
+            List<SampleModel> remote = api.fetchSamples();
+            if (!remote.isEmpty()) {
+                requireActivity().runOnUiThread(() -> {
+                    allSamples.clear();
+                    allSamples.addAll(remote);
+                    filteredSamples.clear();
+                    filteredSamples.addAll(remote);
+                    adapter.notifyDataSetChanged();
+                });
+            } else {
+                requireActivity().runOnUiThread(() -> {
+                    allSamples.clear();
+                    allSamples.addAll(getBuiltinSamples());
+                    filteredSamples.clear();
+                    filteredSamples.addAll(allSamples);
+                    adapter.notifyDataSetChanged();
+                });
+            }
+        }).start();
     }
 
     private void applyFilters() {

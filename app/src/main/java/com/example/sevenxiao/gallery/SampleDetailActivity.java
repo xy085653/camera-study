@@ -90,7 +90,13 @@ public class SampleDetailActivity extends AppCompatActivity {
             player = new ExoPlayer.Builder(this).build();
             playerView.setPlayer(player);
 
-            Uri videoUri = Uri.parse("file:///android_asset/" + file);
+            String videoUrl;
+            if (file != null && file.startsWith("http")) {
+                videoUrl = file;
+            } else {
+                videoUrl = "file:///android_asset/" + file;
+            }
+            Uri videoUri = Uri.parse(videoUrl);
             MediaItem mediaItem = MediaItem.fromUri(videoUri);
             player.setMediaItem(mediaItem);
             player.prepare();
@@ -102,9 +108,15 @@ public class SampleDetailActivity extends AppCompatActivity {
             formatBadge.setVisibility(View.VISIBLE);
             formatBadge.setText("JPG");
 
-            String assetPath = file != null ? file : "samples/overexposure_01.jpg";
+            // 加载图片：优先远端URL，否则 assets 本地
+            String imgUrl;
+            if (file != null && file.startsWith("http")) {
+                imgUrl = file;
+            } else {
+                imgUrl = "file:///android_asset/" + (file != null ? file : "samples/overexposure_01.jpg");
+            }
             Glide.with(this)
-                    .load("file:///android_asset/" + assetPath)
+                    .load(imgUrl)
                     .placeholder(android.R.color.darker_gray)
                     .error(android.R.color.darker_gray)
                     .into(imageView);

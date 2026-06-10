@@ -52,9 +52,15 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
             holder.videoBadge.setVisibility(View.GONE);
         }
 
-        // 使用 Glide 从 assets 加载图片
+        // 加载图片：优先远端正则 URL，否则 assets 本地
+        String imageUrl;
+        if (sample.getStorageUrl() != null && !sample.getStorageUrl().isEmpty()) {
+            imageUrl = sample.getStorageUrl();
+        } else {
+            imageUrl = "file:///android_asset/" + sample.getLocalAsset();
+        }
         Glide.with(holder.thumbnail.getContext())
-                .load("file:///android_asset/" + sample.getLocalAsset())
+                .load(imageUrl)
                 .placeholder(android.R.color.darker_gray)
                 .error(android.R.color.darker_gray)
                 .centerCrop()
