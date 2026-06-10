@@ -1,9 +1,11 @@
-FROM python:3.12-slim
+ARG PYTHON_IMAGE=python:3.12-slim
+FROM $PYTHON_IMAGE
 
 WORKDIR /app
 
+# 国内加速（阿里云 PyPI 镜像）
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 
 COPY . .
 
