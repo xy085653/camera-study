@@ -19,7 +19,7 @@ services:
       context: .
       args:
         # 国内镜像源（极空间/无代理环境使用）
-        PYTHON_IMAGE: docker.mirrors.ustc.edu.cn/library/python:3.12-slim
+        PYTHON_IMAGE: hub-mirror.c.163.com/library/python:3.12-slim
     restart: unless-stopped
     command: >
       sh -c "python manage.py migrate &&
